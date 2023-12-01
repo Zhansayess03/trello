@@ -27,8 +27,8 @@
                     <option th:selected="${task.status == 3}" th:value="3">FAILED</option>
                 </select>
             </div>
-            <button sec:authorize="hasAnyRole('ROLE_ADMIN')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">EDIT</button>
-            <button sec:authorize="hasAnyRole('ROLE_ADMIN')" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">DELETE</button>
+            <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">EDIT</button>
+            <button ` class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">DELETE</button>
         </div>
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

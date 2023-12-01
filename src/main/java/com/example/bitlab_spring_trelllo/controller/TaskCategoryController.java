@@ -31,14 +31,12 @@ public class TaskCategoryController {
         return "category-details";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public String create(TaskCategoryCreateEditDto taskCategory) {
         taskCategoryService.create(taskCategory);
         return "redirect:/categories";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/update/{id}")
     public String update(@PathVariable("id") Long id,
                          TaskCategoryCreateEditDto taskCategory) {
@@ -46,7 +44,6 @@ public class TaskCategoryController {
         return "redirect:/categories/" + id;
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         taskCategoryService.delete(id);

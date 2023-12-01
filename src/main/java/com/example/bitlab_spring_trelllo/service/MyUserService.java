@@ -2,12 +2,12 @@ package com.example.bitlab_spring_trelllo.service;
 
 import com.example.bitlab_spring_trelllo.mapper.UsersMapper;
 import com.example.bitlab_spring_trelllo.model.Permission;
-import com.example.bitlab_spring_trelllo.model.Users;
+import com.example.bitlab_spring_trelllo.model.User;
 import com.example.bitlab_spring_trelllo.repository.PermissionRepository;
 import com.example.bitlab_spring_trelllo.repository.UsersRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,27 +32,32 @@ public class MyUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Users users = usersRepository.findAllByEmail(email);
-        if(users==null){
+        User user = usersRepository.findAllByEmail(email);
+        if(user ==null){
             throw new UsernameNotFoundException("User NOt Found");
         }
-        return users;
+        return user;
     }
-    public String signUp(Users signUpUser){
+    public String signUp(User signUpUser){
         String flag = "userExist";
-        Users checkUser = usersRepository.findAllByEmail(signUpUser.getEmail());
+        User checkUser = usersRepository.findAllByEmail(signUpUser.getEmail());
         if(checkUser==null){
             List<Permission> permissions = new ArrayList<>();
             permissions.add(permissionRepository.findAllByRole("ROLE_USER"));
-            Users users = new Users();
-            users.setEmail(signUpUser.getEmail());
-            users.setFullName(signUpUser.getFullName());
-            users.setAge(signUpUser.getAge());
-            users.setPassword(passwordEncoder.encode(signUpUser.getPassword()));
-            users.setPermissions(permissions);
-            usersRepository.save(users);
+            User user = new User();
+            user.setEmail(signUpUser.getEmail());
+            user.setFullName(signUpUser.getFullName());
+            user.setAge(signUpUser.getAge());
+            user.setPassword(passwordEncoder.encode(signUpUser.getPassword()));
+            user.setPermissions(permissions);
+            usersRepository.save(user);
             flag = "registeredSuccess";
         }
         return flag;
+    }
+
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (User) authentication.getPrincipal();
     }
 }

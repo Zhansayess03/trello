@@ -11,12 +11,14 @@ import com.example.bitlab_spring_trelllo.repository.FolderRepository;
 import com.example.bitlab_spring_trelllo.repository.TaskCategoryRepository;
 import com.example.bitlab_spring_trelllo.repository.TaskRepository;
 import com.example.bitlab_spring_trelllo.service.FolderService;
+import com.example.bitlab_spring_trelllo.service.MyUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -30,10 +32,12 @@ public class FolderServiceImpl implements FolderService {
 
     private final FolderReadMapper folderReadMapper;
     private final FolderCreateEditMapper folderCreateEditMapper;
+    private final MyUserService userService;
 
     @Override
     public List<FolderReadDto> findAll() {
         return folderRepository.findAll().stream()
+                .filter(folder -> Objects.equals(folder.getUser().getId(), userService.getCurrentUser().getId()))
                 .map(folderReadMapper::map)
                 .toList();
     }

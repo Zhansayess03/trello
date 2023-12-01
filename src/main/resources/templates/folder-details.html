@@ -17,7 +17,7 @@
                         <form th:action="@{/folders/unassign-category}" method="post">
                             <input type="hidden" th:value="${folder.id}" name="folder-id">
                             <input type="hidden" th:value="${category.id}" name="category-id">
-                            <button sec:authorize="hasAnyRole('ROLE_ADMIN')" style="border: none; outline: none; background-color: #0c6efd; color: white">
+                            <button  style="border: none; outline: none; background-color: #0c6efd; color: white">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      class="bi bi-x" viewBox="0 0 16 16" style="cursor: pointer">
                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -25,7 +25,7 @@
                             </button>
                         </form>
                     </div>
-                    <a sec:authorize="hasAnyRole('ROLE_ADMIN')" class="ps-3" href="#" data-bs-toggle="modal" data-bs-target="#categoryAdding"
+                    <a class="ps-3" href="#" data-bs-toggle="modal" data-bs-target="#categoryAdding"
                        style="text-decoration: none; color: black"> <strong>+ Add
                         Category</strong></a>
                 </div>
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div sec:authorize="hasAnyRole('ROLE_ADMIN')" class="task-adding row">
+        <div  class="task-adding row">
             <a class="ps-3 pt-3" href="#" data-bs-toggle="modal" data-bs-target="#taskAdding"
                style="text-decoration: none; color: black"> <strong>+ New
                 Task</strong></a>

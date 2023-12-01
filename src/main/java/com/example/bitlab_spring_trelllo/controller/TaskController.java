@@ -31,14 +31,12 @@ public class TaskController {
         return "task-details";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public String create(TaskCreateEditDto task) {
         taskService.create(task);
         return "redirect:/folders/" + task.getFolderId();
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/update/{id}")
     public String update(@PathVariable("id") Long id,
                          TaskCreateEditDto task) {
@@ -46,7 +44,6 @@ public class TaskController {
         return "redirect:/tasks/"+id;
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         taskService.delete(id);

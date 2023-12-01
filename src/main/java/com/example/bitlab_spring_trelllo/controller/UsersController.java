@@ -1,6 +1,6 @@
 package com.example.bitlab_spring_trelllo.controller;
 
-import com.example.bitlab_spring_trelllo.model.Users;
+import com.example.bitlab_spring_trelllo.model.User;
 import com.example.bitlab_spring_trelllo.service.MyUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +35,12 @@ public class UsersController {
                              @RequestParam("password") String password,
                              @RequestParam("re-password") String rePassword){
         if(password.equals(rePassword)) {
-            Users users = new Users();
-            users.setEmail(email);
-            users.setFullName(fullName);
-            users.setAge(age);
-            users.setPassword(password);
-            String text = userService.signUp(users);
+            User user = new User();
+            user.setEmail(email);
+            user.setFullName(fullName);
+            user.setAge(age);
+            user.setPassword(password);
+            String text = userService.signUp(user);
             if(text.equals("registeredSuccess")) {
                 return "redirect:/users/login";
             }else {

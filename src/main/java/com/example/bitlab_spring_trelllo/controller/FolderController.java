@@ -36,14 +36,12 @@ public class FolderController {
         return "folder-details";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')") // только пользователи с ролем админ имеют доступ к этому контроллеру
     @PostMapping("/folders/create")
     public String create(FolderCreateEditDto folder) {
         folderService.create(folder);
         return "redirect:/";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/folders/update/{id}")
     public String update(@PathVariable("id") Long id,
                          FolderCreateEditDto folder) {
@@ -51,14 +49,12 @@ public class FolderController {
         return "redirect:/";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/folders/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         folderService.delete(id);
         return "redirect:/";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/folders/assign-category")
     public String assignCategory(@RequestParam("folder-id") Long folderId,
                                  @RequestParam("category-id") Long categoryId) {
@@ -66,7 +62,6 @@ public class FolderController {
         return "redirect:/folders/"+folderId;
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/folders/unassign-category")
     public String unassignCategory(@RequestParam("folder-id") Long folderId,
                                    @RequestParam("category-id") Long categoryId) {
