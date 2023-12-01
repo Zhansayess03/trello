@@ -13,14 +13,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "folders")
 public class Folder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<TaskCategory> categories;
+
 }

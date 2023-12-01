@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="main_layout.html">
+      layout:decorate="main_layout.html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div layout:fragment="siteContent">
     <div class="col-8 mx-auto">
@@ -26,8 +27,8 @@
                     <option th:selected="${task.status == 3}" th:value="3">FAILED</option>
                 </select>
             </div>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">EDIT</button>
-            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">DELETE</button>
+            <button sec:authorize="hasAnyRole('ROLE_ADMIN')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">EDIT</button>
+            <button sec:authorize="hasAnyRole('ROLE_ADMIN')" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">DELETE</button>
         </div>
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

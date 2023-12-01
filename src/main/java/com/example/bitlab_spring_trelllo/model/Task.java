@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "tasks")
 public class Task {
 
     @Id
@@ -23,7 +24,7 @@ public class Task {
 
     private Integer status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Folder folder;
 
 }

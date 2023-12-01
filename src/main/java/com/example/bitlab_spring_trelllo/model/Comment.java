@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "comments")
 public class Comment {
 
     @Id
@@ -19,6 +20,6 @@ public class Comment {
 
     private String comment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Task task;
 }

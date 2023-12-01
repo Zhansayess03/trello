@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "task_category")
+@Table(name = "task_categories")
 public class TaskCategory {
 
     @Id

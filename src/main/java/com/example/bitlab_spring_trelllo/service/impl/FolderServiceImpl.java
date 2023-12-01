@@ -5,9 +5,11 @@ import com.example.bitlab_spring_trelllo.dto.FolderReadDto;
 import com.example.bitlab_spring_trelllo.mapper.FolderCreateEditMapper;
 import com.example.bitlab_spring_trelllo.mapper.FolderReadMapper;
 import com.example.bitlab_spring_trelllo.model.Folder;
+import com.example.bitlab_spring_trelllo.model.Task;
 import com.example.bitlab_spring_trelllo.model.TaskCategory;
 import com.example.bitlab_spring_trelllo.repository.FolderRepository;
 import com.example.bitlab_spring_trelllo.repository.TaskCategoryRepository;
+import com.example.bitlab_spring_trelllo.repository.TaskRepository;
 import com.example.bitlab_spring_trelllo.service.FolderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ public class FolderServiceImpl implements FolderService {
 
     private final FolderRepository folderRepository;
     private final TaskCategoryRepository taskCategoryRepository;
+    private final TaskRepository taskRepository;
 
     private final FolderReadMapper folderReadMapper;
     private final FolderCreateEditMapper folderCreateEditMapper;
@@ -65,8 +68,12 @@ public class FolderServiceImpl implements FolderService {
     @Transactional
     @Override
     public void delete(Long id) {
-        folderRepository.findById(id)
-                .ifPresent(entity -> folderRepository.deleteById(id));
+        for(Task task : taskRepository.findAll()){
+            if(task.getFolder().getId()==id){
+                taskRepository.deleteById(task.getId());
+            }
+        }
+        folderRepository.deleteById(id);
     }
 
     @Transactional

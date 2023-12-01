@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="main_layout.html">
+      layout:decorate="main_layout.html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div layout:fragment="siteContent">
     <div class="col-12">
-        <div class="folder-adding row">
+        <div sec:authorize="hasAnyRole('ROLE_ADMIN')" class="folder-adding row">
             <a class="ps-3 pt-3" href="#" data-bs-toggle="modal" data-bs-target="#categoryAdding"
                style="text-decoration: none; color: black"> <strong>+ New
                 Category</strong></a>
